@@ -37,8 +37,6 @@
 <portlet:defineObjects />	
 <liferay-theme:defineObjects />
 
-
-
 <c:choose>
 	<c:when test="<%= !themeDisplay.isSignedIn() %>">
 		<p/>
@@ -50,7 +48,7 @@
 		<jsp:useBean id="voList" type="java.util.List<it.italiangrid.portal.dbapi.domain.Vo>" scope="request" />
 		
 		<aui:layout>
-			<aui:fieldset label="Import Job">
+			<aui:fieldset>
 				<br/>
 				<c:forEach var="vo" items="${voList}">
 					
@@ -60,18 +58,20 @@
 							<br/>No job to import. <br/><br/>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="value" items="${jobMap[vo.vo] }">
-							
-								<form method="post" name="importTest" id="importTest" action="https://portal.italiangrid.it/web/guest/import?p_auth=<%=AuthTokenUtil.getToken(request)%>&p_p_id=wfimport_WAR_wspgrade&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_wfimport_WAR_wspgrade_guse=doJustDoIt">
+							<form method="post" name="importTest" id="importTest" action="https://portal.italiangrid.it/web/guest/import?p_auth=<%=AuthTokenUtil.getToken(request)%>&p_p_id=wfimport_WAR_wspgrade&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_wfimport_WAR_wspgrade_guse=doJustDoIt">
 									<input type="hidden" value="import" name="impMethode">
 									<input type="hidden" value="appl" name="impWfType">
-									<input type="hidden" value="${fn:split(value,':')[1]}" name="impItemId">
 									<input type="hidden" value="https://portal.italiangrid.it/web/guest/job-monitor" name="returnPath">
-									<input type="hidden" value="JOB_${fn:split(value,':')[0]}_${vo.vo }" name="wfimp_newRealName">
-									<input type="submit" value="${fn:split(value,':')[0]} Job Workflow">
+									<input type="hidden" value="JOB_${vo.vo }" name="wfimp_newRealName">
+									<select name="impItemId" >
+										<c:forEach var="value" items="${jobMap[vo.vo] }">
+	
+												<option value="${fn:split(value,':')[1]}" >${fn:split(value,':')[0]}</option>
+	
+										</c:forEach>
+									</select>
+									<input type="submit" value="Import Job">
 								</form>
-								
-							</c:forEach>
 							<br/>
 						</c:otherwise>
 					</c:choose>
