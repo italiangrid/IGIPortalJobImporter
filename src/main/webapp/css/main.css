@@ -1,0 +1,12 @@
+#container {
+	background-color: #e4e4e4;
+	border: 1px;
+	border-style: solid;
+	border-color: #c1c1c1;
+	border-radius: 5px;
+	padding: 10px 5px 5px 10px;
+}
+
+#presentation {
+	margin: 10px;
+}
