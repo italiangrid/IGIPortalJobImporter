@@ -7,13 +7,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import it.italiangrid.portal.dbapi.domain.Vo;
-import it.italiangrid.portal.jobImporter.controller.HomeController;
-
-import org.apache.log4j.Logger;
 
 public class UtilityMap {
-	
-	private static final Logger log = Logger.getLogger(HomeController.class);
 	
 	public static Map<String, List<String>> createMap(List<Vo> userVos){
 		
