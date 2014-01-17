@@ -43,6 +43,8 @@
 <portlet:defineObjects />	
 <liferay-theme:defineObjects />
 
+<portlet:renderURL var="url"/>
+
 <c:choose>
 	<c:when test="<%= !themeDisplay.isSignedIn() %>">
 		<p/>
@@ -67,7 +69,7 @@
 							<form method="post" name="importTest" id="importTest" action="https://portal.italiangrid.it/web/guest/import?p_auth=<%=AuthTokenUtil.getToken(request)%>&p_p_id=wfimport_WAR_wspgrade&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_wfimport_WAR_wspgrade_guse=doJustDoIt">
 									<input type="hidden" value="import" name="impMethode">
 									<input type="hidden" value="appl" name="impWfType">
-									<input type="hidden" value="https://portal.italiangrid.it/web/guest/workflow" name="returnPath">
+									<input type="hidden" value="${fn:split(url,'?')[0]}" name="returnPath">
 									<input type="hidden" value="JOB_${vo.vo }" name="wfimp_newRealName">
 									<select name="impItemId" >
 										<c:forEach var="value" items="${jobMap[vo.vo] }">
